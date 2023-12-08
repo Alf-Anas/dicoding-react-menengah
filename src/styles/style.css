@@ -1,0 +1,212 @@
+@import url("https://fonts.googleapis.com/css2?family=Gabarito&display=swap");
+@import url("./modal.css");
+
+:root {
+    --primary-color: #b6fffa;
+    --secondary-color: #98e4ff;
+    --tertiary-color: #80b3ff;
+    --quaternary-color: #687eff;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    font-family: Gabarito, sans-serif;
+    background-color: var(--secondary-color);
+}
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    padding: 0px 20px;
+    text-align: justify;
+}
+
+footer {
+    padding: 20px;
+}
+
+main {
+    padding: 20px;
+    flex: 1;
+}
+
+#content {
+    display: block;
+    gap: 40px;
+}
+
+.top-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    gap: 12px;
+}
+
+.search-container {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+}
+
+.main-input {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+}
+
+.search-input {
+    flex: 1;
+    margin-right: 5px;
+}
+
+.main-button {
+    background-color: var(--quaternary-color);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.small-button {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+}
+
+.main-button:hover {
+    background-color: var(--tertiary-color);
+}
+
+.type-section {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 20px;
+    text-align: justify;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+}
+
+.type-section > h2 {
+    color: var(--tertiary-color);
+}
+
+.note-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.note-card {
+    border-radius: 4px;
+    border: solid 1px #333;
+    padding: 10px;
+    margin: 10px 0;
+    flex-basis: calc(50% - 30px);
+}
+
+.note-card > h3 {
+    margin: 8px 0 4px 0;
+}
+
+@media screen and (max-width: 800px) {
+    .top-container {
+        flex-direction: column;
+    }
+    .note-list {
+        flex-direction: column;
+    }
+    .note-card {
+        flex: 100%;
+    }
+}
+
+.note-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.note-form-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
+.text-white {
+    color: #fff;
+}
+
+.text-black {
+    color: #000;
+}
+
+.text-gray {
+    color: #888;
+}
+
+.text-primary {
+    color: var(--primary-color);
+}
+
+.text-secondary {
+    color: var(--secondary-color);
+}
+
+.text-tertiary {
+    color: var(--tertiary-color);
+}
+
+.text-quaternary {
+    color: var(--quaternary-color);
+}
+
+.bg-primary {
+    background-color: var(--primary-color);
+}
+
+.bg-secondary {
+    background-color: var(--secondary-color);
+}
+
+.bg-tertiary {
+    background-color: var(--tertiary-color);
+}
+
+.bg-quaternary {
+    background-color: var(--quaternary-color);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.mt-0 {
+    margin-top: 0;
+}
+
+.mr-05 {
+    margin-right: 0.5rem;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.float-right {
+    float: right;
+}
