@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Gabarito&display=swap");
-@import url("./modal.css");
 
 :root {
     --primary-color: #b6fffa;
@@ -24,6 +23,12 @@ body {
 header {
     padding: 0px 20px;
     text-align: justify;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 footer {
@@ -84,6 +89,27 @@ main {
     background-color: var(--tertiary-color);
 }
 
+.radio-button {
+    display: inline-block;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    margin-right: 5px;
+}
+
+.radio-button input {
+    display: none;
+}
+
+.radio-button.active {
+    background-color: var(--quaternary-color);
+    color: #fff;
+}
+
+.radio-button:hover {
+    background-color: var(--tertiary-color);
+}
+
 .type-section {
     flex: 1;
     background-color: #fff;
@@ -110,11 +136,24 @@ main {
     border: solid 1px #333;
     padding: 10px;
     margin: 10px 0;
-    flex-basis: calc(50% - 30px);
+    flex-basis: calc(33% - 30px);
 }
 
 .note-card > h3 {
     margin: 8px 0 4px 0;
+}
+
+.card {
+    border-radius: 4px;
+    border: solid 1px #333;
+    padding: 10px;
+    margin: 10px 0;
+    flex-basis: calc(50% - 30px);
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
 }
 
 @media screen and (max-width: 800px) {
@@ -171,6 +210,10 @@ main {
     color: var(--quaternary-color);
 }
 
+.text-red {
+    color: #f00;
+}
+
 .bg-primary {
     background-color: var(--primary-color);
 }
@@ -195,12 +238,25 @@ main {
     margin-bottom: 0;
 }
 
+.mb-1 {
+    margin-bottom: 1rem;
+}
+
 .mt-0 {
     margin-top: 0;
 }
 
 .mr-05 {
     margin-right: 0.5rem;
+}
+
+.mx-auto {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.max-w-600 {
+    max-width: 600px;
 }
 
 .w-100 {

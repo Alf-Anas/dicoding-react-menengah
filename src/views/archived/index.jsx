@@ -2,17 +2,15 @@ import React, { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Note from "../../components/Note";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import RadioButton from "../../components/RadioButton";
+import { useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
-import { FaSearch, FaPlus } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 
-export default function HomePage({
+export default function ArchivedPage({
     listNote,
     onDeleteNote = () => {},
     onArchivedNote = () => {},
 }) {
-    const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const query = searchParams.get("query") || "";
 
@@ -46,13 +44,9 @@ export default function HomePage({
         }
     }
 
-    const listActiveNote = listFilteredNote.filter(
-        (note) => note.archived === false
+    const listArchiveNote = listFilteredNote.filter(
+        (note) => note.archived === true
     );
-
-    function onClickAdd() {
-        navigate("/new");
-    }
 
     return (
         <>
@@ -70,17 +64,12 @@ export default function HomePage({
                             <FaSearch /> Cari
                         </Button>
                     </div>
-
-                    <Button onClick={onClickAdd}>
-                        <FaPlus /> Tambah Catatan
-                    </Button>
                 </div>
-                <RadioButton />
                 <div id="content">
                     <section className="type-section">
-                        <h2>Catatan Aktif</h2>
+                        <h2>Arsip</h2>
                         <div className="note-list">
-                            {listActiveNote.map((note, idx) => {
+                            {listArchiveNote.map((note, idx) => {
                                 return (
                                     <Note
                                         key={idx}
@@ -90,8 +79,8 @@ export default function HomePage({
                                     />
                                 );
                             })}
-                            {listActiveNote.length === 0 && (
-                                <p>Catatan tidak ditemukan!</p>
+                            {listArchiveNote.length === 0 && (
+                                <p>Arsip Catatan tidak ditemukan!</p>
                             )}
                         </div>
                     </section>
@@ -101,7 +90,7 @@ export default function HomePage({
     );
 }
 
-HomePage.propTypes = {
+ArchivedPage.propTypes = {
     listNote: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.string.isRequired,

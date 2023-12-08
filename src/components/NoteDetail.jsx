@@ -1,25 +1,17 @@
 import React from "react";
-import { showFormattedDate, getTruncatedText } from "../utils";
+import { showFormattedDate } from "../utils";
 import Button from "./Button";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
-import {
-    FaRegFileArchive,
-    FaRegTrashAlt,
-    FaRegEye,
-    FaFileExport,
-} from "react-icons/fa";
+import { FaRegFileArchive, FaRegTrashAlt, FaFileExport } from "react-icons/fa";
 
-export default function Note({
+export default function NoteDetail({
     note = {},
     onDelete = (_id) => {},
     onArchived = (_id, _archived) => {},
 }) {
-    const navigate = useNavigate();
     const tandaiButton = note.archived ? (
         <Button
             variant="secondary"
-            size="sm"
             className="mr-05"
             onClick={() => onArchived(note.id, false)}
         >
@@ -28,7 +20,6 @@ export default function Note({
     ) : (
         <Button
             variant="secondary"
-            size="sm"
             className="mr-05"
             onClick={() => onArchived(note.id, true)}
         >
@@ -36,38 +27,27 @@ export default function Note({
         </Button>
     );
 
-    const onClickDetail = (id = "") => {
-        navigate(`/detail/${id}`);
-    };
-
     return (
         <div className="note-card">
             <h3>{note.title}</h3>
             <p className="mb-0 mt-0 text-gray">
                 {showFormattedDate(note.createdAt)}
             </p>
-            <p className="mt-0">{getTruncatedText(note.body, 100)}</p>
+            <p className="mt-0">{note.body}</p>
             <div className="flex-between">
+                <div />
                 <div>
                     {tandaiButton}
-                    <Button
-                        size="sm"
-                        className="mr-05"
-                        onClick={() => onDelete(note.id)}
-                    >
+                    <Button className="mr-05" onClick={() => onDelete(note.id)}>
                         <FaRegTrashAlt /> Hapus
                     </Button>
                 </div>
-
-                <Button size="sm" onClick={() => onClickDetail(note.id)}>
-                    <FaRegEye /> Detail
-                </Button>
             </div>
         </div>
     );
 }
 
-Note.propTypes = {
+NoteDetail.propTypes = {
     note: PropTypes.shape({
         id: PropTypes.string,
         title: PropTypes.string,

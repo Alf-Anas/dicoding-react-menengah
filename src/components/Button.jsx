@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function getVariant(variant = "primary") {
     switch (variant) {
@@ -40,3 +41,10 @@ export default function Button({
         </button>
     );
 }
+
+Button.propTypes = {
+    variant: PropTypes.oneOf(["primary", "secondary"]),
+    size: PropTypes.oneOf(["sm", "md"]),
+    children: PropTypes.node,
+    className: PropTypes.string,
+};
