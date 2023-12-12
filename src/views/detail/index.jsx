@@ -9,6 +9,7 @@ import {
 } from "../../utils/api";
 import LoadingIcon from "../../components/LoadingIcon";
 import LocaleContext from "../../contexts/LocaleContext";
+import useRefresh from "../../hooks/useRefresh";
 
 export default function DetailPage() {
     const { id } = useParams();
@@ -17,7 +18,7 @@ export default function DetailPage() {
     const { locale } = useContext(LocaleContext);
 
     const [noteData, setNoteData] = useState();
-    const [refresh, setRefresh] = useState(new Date().getTime());
+    const [refresh, setRefresh] = useRefresh();
 
     useEffect(() => {
         if (!id) return;
@@ -54,7 +55,7 @@ export default function DetailPage() {
             archiveNote(id)
                 .then((res) => {
                     if (!res.error) {
-                        setRefresh(new Date().getTime());
+                        setRefresh();
                     }
                 })
                 .catch((err) => console.error(err))
@@ -63,7 +64,7 @@ export default function DetailPage() {
             unarchiveNote(id)
                 .then((res) => {
                     if (!res.error) {
-                        setRefresh(new Date().getTime());
+                        setRefresh();
                     }
                 })
                 .catch((err) => console.error(err))

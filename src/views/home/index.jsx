@@ -9,6 +9,7 @@ import { archiveNote, deleteNote, getActiveNotes } from "../../utils/api";
 import AuthContext from "../../contexts/AuthContext";
 import LoadingIcon from "../../components/LoadingIcon";
 import LocaleContext from "../../contexts/LocaleContext";
+import useRefresh from "../../hooks/useRefresh";
 
 export default function HomePage() {
     const { userData, isLogin } = useContext(AuthContext);
@@ -19,7 +20,7 @@ export default function HomePage() {
 
     const [listNote, setListNote] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [refresh, setRefresh] = useState(new Date().getTime());
+    const [refresh, setRefresh] = useRefresh();
 
     const [listFilteredNote, setListFilteredNote] = useState(listNote);
     const [search, setSearch] = useState("");
@@ -79,7 +80,7 @@ export default function HomePage() {
         deleteNote(id)
             .then((res) => {
                 if (!res.error) {
-                    setRefresh(new Date().getTime());
+                    setRefresh();
                 }
             })
             .catch((err) => console.error(err))
@@ -93,7 +94,7 @@ export default function HomePage() {
         archiveNote(id)
             .then((res) => {
                 if (!res.error) {
-                    setRefresh(new Date().getTime());
+                    setRefresh();
                 }
             })
             .catch((err) => console.error(err))
