@@ -1,3 +1,5 @@
+import { getItemLocale } from "../components/locale/locale";
+
 const INITIAL_NOTE_DATA = {
     id: "",
     title: "",
@@ -52,13 +54,15 @@ const getInitialData = () => [
 ];
 
 const showFormattedDate = (date) => {
+    const eLang = getItemLocale();
+    let localeId = eLang === "en" ? "en-US" : "id-ID";
     const options = {
         weekday: "long",
         year: "numeric",
         month: "long",
         day: "numeric",
     };
-    return new Date(date).toLocaleDateString("id-ID", options);
+    return new Date(date).toLocaleDateString(localeId, options);
 };
 
 const generateRandomId = () => {
@@ -72,10 +76,20 @@ const getTruncatedText = (text = "", maxLength = 30) => {
     return text.slice(0, maxLength) + "…";
 };
 
+function getTheme() {
+    return localStorage.getItem("theme");
+}
+
+function putTheme(theme) {
+    return localStorage.setItem("theme", theme);
+}
+
 export {
     getInitialData,
     showFormattedDate,
     generateRandomId,
     getTruncatedText,
     INITIAL_NOTE_DATA,
+    getTheme,
+    putTheme,
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { showFormattedDate, getTruncatedText } from "../utils";
 import Button from "./Button";
 import PropTypes from "prop-types";
@@ -9,12 +9,14 @@ import {
     FaRegEye,
     FaFileExport,
 } from "react-icons/fa";
+import LocaleContext from "../contexts/LocaleContext";
 
 export default function Note({
     note = {},
     onDelete = (_id) => {},
     onArchived = (_id, _archived) => {},
 }) {
+    const { locale } = useContext(LocaleContext);
     const navigate = useNavigate();
     const tandaiButton = note.archived ? (
         <Button
@@ -23,7 +25,7 @@ export default function Note({
             className="mr-05"
             onClick={() => onArchived(note.id, false)}
         >
-            <FaFileExport /> Aktifkan
+            <FaFileExport /> {locale.unarchive}
         </Button>
     ) : (
         <Button
@@ -32,7 +34,7 @@ export default function Note({
             className="mr-05"
             onClick={() => onArchived(note.id, true)}
         >
-            <FaRegFileArchive /> Arsipkan
+            <FaRegFileArchive /> {locale.archiving}
         </Button>
     );
 
@@ -55,12 +57,12 @@ export default function Note({
                         className="mr-05"
                         onClick={() => onDelete(note.id)}
                     >
-                        <FaRegTrashAlt /> Hapus
+                        <FaRegTrashAlt /> {locale.delete}
                     </Button>
                 </div>
 
                 <Button size="sm" onClick={() => onClickDetail(note.id)}>
-                    <FaRegEye /> Detail
+                    <FaRegEye /> {locale.detail}
                 </Button>
             </div>
         </div>

@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import { generateRandomId } from "../../utils";
 import { useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
+import { addNote } from "../../utils/api";
+import LoadingIcon from "../../components/LoadingIcon";
+import LocaleContext from "../../contexts/LocaleContext";
 
 const MAX_TITLE_LENGTH = 50;
 
-export default function NewPage({ onAddNewNote = () => {} }) {
+export default function NewPage() {
     const navigate = useNavigate();
+    const { locale } = useContext(LocaleContext);
 
     const [noteForm, setNoteForm] = useState({ title: "", body: "" });
+    const [isLoading, setIsLoading] = useState(false);
 
     function onChangeNoteFormTitle(e) {
         const eVal = e.target.value;
@@ -30,21 +33,23 @@ export default function NewPage({ onAddNewNote = () => {} }) {
         setNoteForm({ title: "", body: "" });
     }
 
-    function onConfirmModal() {
+    function onSaveNote() {
         if (!noteForm.title) {
-            window.alert("Judul belum terisi!");
+            window.alert(locale.msgNoteEmpty);
             return;
         }
-        const newNote = {
-            id: generateRandomId(),
-            title: noteForm.title,
-            body: noteForm.body,
-            createdAt: new Date().toISOString(),
-            archived: false,
-        };
-        onAddNewNote(newNote);
-        onClearForm();
-        navigate("/");
+        setIsLoading(true);
+        addNote(noteForm)
+            .then((res) => {
+                if (!res.error) {
+                    onClearForm();
+                    navigate("/");
+                }
+            })
+            .catch((err) => console.error(err))
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
 
     return (
@@ -53,14 +58,14 @@ export default function NewPage({ onAddNewNote = () => {} }) {
                 <form className="note-form">
                     {noteForm.title.length > 0 && (
                         <small className="float-right">
-                            Sisa Karakter :{" "}
+                            {locale.characterLeft} :{" "}
                             {MAX_TITLE_LENGTH - noteForm.title.length}
                         </small>
                     )}
                     <Input
                         className="note-form-input"
                         type="text"
-                        placeholder="Judul"
+                        placeholder={locale.notes}
                         value={noteForm.title}
                         onChange={onChangeNoteFormTitle}
                     />
@@ -74,12 +79,10 @@ export default function NewPage({ onAddNewNote = () => {} }) {
                         onChange={onChangeNoteFormBody}
                     />
                 </form>
-                <Button onClick={onConfirmModal}>Simpan</Button>
+                <Button onClick={onSaveNote} disabled={isLoading}>
+                    {isLoading && <LoadingIcon />} {locale.save}
+                </Button>
             </div>
         </section>
     );
 }
-
-NewPage.propTypes = {
-    onAddNewNote: PropTypes.func,
-};

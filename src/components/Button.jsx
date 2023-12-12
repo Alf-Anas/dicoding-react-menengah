@@ -6,7 +6,7 @@ function getVariant(variant = "primary") {
         case "primary":
             return "main-button";
         case "secondary":
-            return "main-button bg-primary text-black";
+            return "main-button bg-primary text-main-color";
         default:
             return "main-button";
     }

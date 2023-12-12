@@ -8,7 +8,7 @@ export default function Footer() {
                 <a
                     href="https://geoit.dev"
                     target="_blank"
-                    className="text-secondary"
+                    className="text-white"
                 >
                     GeoIT Developer
                 </a>{" "}

@@ -5,6 +5,17 @@
     --secondary-color: #98e4ff;
     --tertiary-color: #80b3ff;
     --quaternary-color: #687eff;
+    --paper-color: #fff;
+    --font-color: #333;
+}
+
+[data-theme="dark"] {
+    --primary-color: #001f3f;
+    --secondary-color: #003366;
+    --tertiary-color: #004080;
+    --quaternary-color: #00509e;
+    --paper-color: #040f1a;
+    --font-color: #eee;
 }
 
 body {
@@ -12,6 +23,7 @@ body {
     margin: 0;
     font-family: Gabarito, sans-serif;
     background-color: var(--secondary-color);
+    color: var(--font-color);
 }
 
 #root {
@@ -63,6 +75,7 @@ main {
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     font-size: 1rem;
+    background-color: var(--paper-color);;
 }
 
 .search-input {
@@ -89,6 +102,11 @@ main {
     background-color: var(--tertiary-color);
 }
 
+.main-button:disabled {
+    background-color: var(--tertiary-color);
+    cursor: not-allowed;
+}
+
 .radio-button {
     display: inline-block;
     padding: 8px 16px;
@@ -112,7 +130,7 @@ main {
 
 .type-section {
     flex: 1;
-    background-color: #fff;
+    background-color: var(--paper-color);
     border-radius: 8px;
     margin-bottom: 20px;
     padding: 20px;
@@ -122,7 +140,7 @@ main {
 }
 
 .type-section > h2 {
-    color: var(--tertiary-color);
+    color: var(--font-color);
 }
 
 .note-list {
@@ -168,10 +186,23 @@ main {
     }
 }
 
+.spinner {
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .note-form {
     max-width: 600px;
     margin: 0 auto;
-    background-color: #fff;
+    background-color: var(--paper-color);
     padding: 20px;
 }
 
@@ -234,6 +265,10 @@ main {
     text-align: center;
 }
 
+.text-start {
+    text-align: start;
+}
+
 .mb-0 {
     margin-bottom: 0;
 }
@@ -244,6 +279,14 @@ main {
 
 .mt-0 {
     margin-top: 0;
+}
+
+.mt-5 {
+    margin-top: 5rem;
+}
+
+.mt-10 {
+    margin-top: 10rem;
 }
 
 .mr-05 {
@@ -265,4 +308,18 @@ main {
 
 .float-right {
     float: right;
+}
+
+.p-0 {
+    padding: 0;
+}
+.p-05 {
+    padding: 0.5rem;
+}
+.p-025 {
+    padding: 0.25rem;
+}
+
+.text-main-color {
+    color: var(--font-color);
 }
